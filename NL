@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Dəvətnaməsi - Nizami & Lətifə</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f2ede4;
+            font-family: 'Montserrat', sans-serif;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ZƏRF VƏ MÖHÜR EKRANI */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5ebe0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        .envelope {
+            width: 280px;
+            height: 200px;
+            background-color: #e6ccb2;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ddb892;
+        }
+
+        .seal-btn {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffe5ec 0%, #d4af37 40%, #aa7c11 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: 2px solid #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .seal-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .tap-text {
+            margin-top: 25px;
+            font-size: 16px;
+            color: #7f5539;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* ƏSAS İÇƏRİK (DƏVƏTNAMƏ) */
+        #main-card {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 30px 20px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #e0d5c1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 42px;
+            color: #b5838d;
+            margin: 15px 0;
+        }
+
+        .sub-title {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #9a8c98;
+        }
+
+        .section {
+            margin: 30px 0;
+            padding-top: 20px;
+            border-top: 1px dashed #e0d5c1;
+        }
+
+        /* GERİSAYIM */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .time-box {
+            background: #f8edeb;
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 65px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: #6d6875;
+        }
+
+        .time-box label {
+            font-size: 11px;
+            color: #b5838d;
+        }
+
+        /* DÜYMƏLƏR VƏ XƏRİTƏ */
+        .btn {
+            display: inline-block;
+            background-color: #b5838d;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e56b6f;
+        }
+
+        /* ÜRƏK SÖZLƏRİ FORMASI */
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .wishes-list {
+            margin-top: 15px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .wish-item {
+            background: #fbf8f3;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            border-left: 3px solid #b5838d;
+        }
+
+        .wish-item strong {
+            color: #6d6875;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Musiqi Faylı -->
+    <audio id="bg-music" loop>
+        <source src="https://www.epidemicsound.com/music/tracks/938eb4a7-90e0-4e8b-8d17-7b8a6a18f34e/" type="audio/mpeg">
+    </audio>
+
+    <!-- ZƏRF EKRANI -->
+    <div id="envelope-screen">
+        <div class="envelope">
+            <div class="seal-btn" onclick="openInvitation()">❤</div>
+        </div>
+        <div class="tap-text">Açmaq üçün toxunun</div>
+    </div>
+
+    <!-- DƏVƏTNAMƏ İÇƏRİYİ -->
+    <div id="main-card">
+        <div class="sub-title">BİZ EVLƏNİRİK</div>
+        <div class="names">Nizami & Lətifə</div>
+        <p>Sizi bu xüsusi və xoşbəxt günümüzdə yanımızda görməkdən şad olarıq!</p>
+
+        <!-- GERİSAYIM -->
+        <div class="section">
+            <div class="sub-title">TOYA QALAN VAXT</div>
+            <div class="countdown">
+                <div class="time-box"><span id="days">00</span><label>Gün</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Saat</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Dəqiqə</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Saniyə</label></div>
+            </div>
+        </div>
+
+        <!-- MƏKAN VƏ TARİX -->
+        <div class="section">
+            <div class="sub-title">MƏKAN VƏ TARİX</div>
+            <p style="margin-top: 8px; font-weight: 600;">10 Oktyabr 2026, Saat 18:00</p>
+            <p style="font-size: 14px; color: #777;">Diva Wedding Hall, Həsən Əliyev 141</p>
+            <a href="https://maps.app.goo.gl/dsJuvUECAsK6DVbp9" target="_blank" class="btn">📍 Xəritədə Baxın</a>
+        </div>
+
+        <!-- RSVP (GƏLİŞİN TƏSDİQİ) -->
+        <div class="section">
+            <div class="sub-title">RSVP / İŞTİRAK TƏSDİQİ</div>
+            <p style="font-size: 13px; margin-bottom: 10px;">Lütfən gəlişinizi öncədən bildirin.</p>
+            <a href="https://wa.me/994705612656?text=Salam,%20toyunuzda%20iştirak%20edəcəyəm!" target="_blank" class="btn" style="background-color: #25D366;">WhatsApp ilə Təsdiq Et</a>
+        </div>
+
+        <!-- ÜRƏK SÖZLƏRİ BÖLMƏSİ -->
+        <div class="section">
+            <div class="sub-title">ÜRƏK SÖZLƏRİNİZ</div>
+            <form id="wishForm" style="margin-top: 10px;">
+                <input type="text" id="guestName" placeholder="Adınız və Soyadınız" required>
+                <textarea id="guestWish" rows="3" placeholder="Təbrikinizi və ürək sözlərinizi yazın..." required></textarea>
+                <button type="submit" class="btn">Göndər</button>
+            </form>
+
+            <div class="wishes-list" id="wishesList"></div>
+        </div>
+    </div>
+
+    <script>
+        function openInvitation() {
+            var screen = document.getElementById('envelope-screen');
+            var card = document.getElementById('main-card');
+            var music = document.getElementById('bg-music');
+
+            music.play().catch(function(error) {
+                console.log("Musiqi səsləndirilə bilmədi:", error);
+            });
+
+            screen.style.opacity = '0';
+            setTimeout(function() {
+                screen.style.display = 'none';
+                card.style.display = 'block';
+                setTimeout(function() {
+                    card.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        // Toy Tarixi: 10 Oktyabr 2026, 18:00
+        var weddingDate = new Date("Oct 10, 2026 18:00:00").getTime();
+
+        var timer = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = weddingDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".countdown").innerHTML = "Toy Günü Çatdı!";
+            }
+        }, 1000);
+
+        document.getElementById('wishForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = document.getElementById('guestName').value;
+            var wish = document.getElementById('guestWish').value;
+
+            var wishesList = document.getElementById('wishesList');
+            var newWish = document.createElement('div');
+            newWish.className = 'wish-item';
+            newWish.innerHTML = '<strong>' + name + '</strong>' + wish;
+
+            wishesList.prepend(newWish);
+
+            document.getElementById('guestName').value = '';
+            document.getElementById('guestWish').value = '';
+        });
+    </script>
+</body>
+</html>

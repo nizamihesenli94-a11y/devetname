@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toy Dəvətnaməsi | Nizami & Lətifə</title>
+    <title>Toy Dəvətnaməsi</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #6b4c35;
+            --primary-color: #7d6342;
             --accent-color: #c5a059;
-            --bg-color: #f7f4ef;
+            --bg-color: #faf8f5;
             --text-color: #4a4a4a;
             --card-bg: #ffffff;
         }
@@ -31,132 +31,19 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px 10px;
-            overflow-x: hidden;
         }
 
-        /* Zərf Ekranı */
-        #envelope-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .envelope {
-            width: 300px;
-            height: 200px;
-            background: #e6dfd5;
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #d4c8b8;
-        }
-
-        .envelope::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 110px solid #d9cebe;
-            transform-origin: top;
-        }
-
-        .wax-seal {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, #b83232 0%, #801b1b 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #f5e6ab;
-            font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            font-weight: bold;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(0,0,0,0.4);
-            cursor: pointer;
-            z-index: 10;
-            border: 2px solid #9e2424;
-            transition: transform 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-
-        .wax-seal:hover {
-            transform: scale(1.08);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-            100% { transform: scale(1); }
-        }
-
-        .tap-text {
-            margin-top: 25px;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            animation: fadeIn 1.5s infinite alternate;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0.5; }
-            to { opacity: 1; }
-        }
-
-        /* Əsas Dəvətnamə Kartı */
         .invitation-card {
             background-color: var(--card-bg);
             max-width: 500px;
             width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            padding: 50px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 40px 25px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        /* Yarpaq / Botanik Bəzəklər */
-        .leaf-decoration {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            opacity: 0.15;
-            pointer-events: none;
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        .leaf-top-left {
-            top: -10px;
-            left: -10px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%236b4c35" d="M10,90 Q50,10 90,10 Q50,50 10,90 Z"/></svg>');
-        }
-
-        .leaf-bottom-right {
-            bottom: -10px;
-            right: -10px;
-            transform: rotate(180deg);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%236b4c35" d="M10,90 Q50,10 90,10 Q50,50 10,90 Z"/></svg>');
         }
 
         .invitation-card::before {
@@ -170,48 +57,27 @@
         .subtitle {
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--accent-color);
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 500;
         }
 
+        /* Bəy və Gəlin adlarının ölçüsü böyüdüldü */
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
+            font-size: 3.8rem;
             color: var(--primary-color);
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 20px;
         }
 
         .invitation-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-bottom: 30px;
-            color: #555;
-        }
-
-        .details-box {
-            background: #faf8f5;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px dashed rgba(197, 160, 89, 0.4);
-        }
-
-        .detail-item {
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        .detail-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .detail-item i {
-            color: var(--accent-color);
-            margin-right: 8px;
+            color: #666;
         }
 
         .section-title {
@@ -229,36 +95,10 @@
             width: 40px;
             height: 1px;
             background-color: var(--accent-color);
-            margin: 6px auto 0;
+            margin: 5px auto 0;
         }
 
-        .timer-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .timer-block {
-            background: #fdfbf7;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            border-radius: 10px;
-            padding: 10px;
-            min-width: 65px;
-        }
-
-        .timer-number {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .timer-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: #777;
-        }
-
+        /* Geyim Kodları (Dress Code) */
         .dress-code-container {
             display: flex;
             justify-content: space-around;
@@ -268,19 +108,14 @@
 
         .dress-code-card {
             flex: 1;
-            background: #faf8f5;
-            border: 1px solid rgba(197, 160, 89, 0.25);
+            background: #fdfbf7;
+            border: 1px solid rgba(197, 160, 89, 0.2);
             border-radius: 12px;
             padding: 15px 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .dress-code-card:hover {
-            transform: translateY(-3px);
         }
 
         .dress-code-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--accent-color);
             margin-bottom: 8px;
         }
@@ -299,6 +134,7 @@
             color: #555;
         }
 
+        /* Form Elementləri */
         .form-group {
             margin-bottom: 15px;
             text-align: left;
@@ -308,7 +144,7 @@
             display: block;
             font-size: 0.85rem;
             font-weight: 500;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             color: var(--primary-color);
         }
 
@@ -317,35 +153,22 @@
         .form-group textarea {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #e2e2e2;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
             font-family: inherit;
             font-size: 0.95rem;
             background-color: #fafafa;
         }
 
-        .btn-map {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: #fff;
         }
 
-        .btn-map:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
+        /* WhatsApp Düyməsi */
         .btn-whatsapp {
             width: 100%;
             background-color: #25D366;
@@ -362,7 +185,6 @@
             gap: 10px;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
             margin-top: 20px;
-            transition: background-color 0.3s;
         }
 
         .btn-whatsapp:hover {
@@ -372,72 +194,14 @@
 </head>
 <body>
 
-    <!-- Zərf Ekranı -->
-    <div id="envelope-screen">
-        <div class="envelope">
-            <div class="wax-seal" onclick="openEnvelope()">N&L</div>
-        </div>
-        <div class="tap-text" onclick="openEnvelope()">açmaq üçün toxunun</div>
-    </div>
-
-    <!-- Səs Faylı (İstədiyiniz mp3 linkini bura yerləşdirə bilərsiniz) -->
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Dəvətnamə Kartı -->
-    <div class="invitation-card" id="main-card">
-        <div class="leaf-decoration leaf-top-left"></div>
-        <div class="leaf-decoration leaf-bottom-right"></div>
-
-        <div class="subtitle">Xoş Günümüzə Dəvətlisiniz</div>
+    <div class="invitation-card">
+        <div class="subtitle">Birlikdə Yeni Bir Başlanğıca</div>
         
-        <h1 class="couple-names">Nizami & Lətifə</h1>
+        <h1 class="couple-names">Əli & Aysel</h1>
         
         <p class="invitation-text">
-            Sizi bu xüsusi və unudulmaz günümüzü bizimlə bölüşməyə dəvət edirik.
+            Sizi bu xüsusi və xoş günümüzdə yanımızda görməkdən şad olarıq.
         </p>
-
-        <!-- Detallar -->
-        <div class="details-box">
-            <div class="detail-item">
-                <i class="fa-regular fa-calendar-days"></i>
-                <strong>Tarix:</strong> 25 İyun 2026
-            </div>
-            <div class="detail-item">
-                <i class="fa-regular fa-clock"></i>
-                <strong>Saat:</strong> 18:00
-            </div>
-            <div class="detail-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <strong>Məkan:</strong> Şadlıq Sarayı
-            </div>
-        </div>
-
-        <a href="https://maps.google.com" target="_blank" class="btn-map">
-            <i class="fa-solid fa-map-location-dot"></i> Xəritədə Baxın
-        </a>
-
-        <!-- Taymer -->
-        <div class="section-title">Toy Gününə Qalan Vaxt</div>
-        <div class="timer-container">
-            <div class="timer-block">
-                <div class="timer-number" id="days">00</div>
-                <div class="timer-label">Gün</div>
-            </div>
-            <div class="timer-block">
-                <div class="timer-number" id="hours">00</div>
-                <div class="timer-label">Saat</div>
-            </div>
-            <div class="timer-block">
-                <div class="timer-number" id="minutes">00</div>
-                <div class="timer-label">Dəqiqə</div>
-            </div>
-            <div class="timer-block">
-                <div class="timer-number" id="seconds">00</div>
-                <div class="timer-label">Saniyə</div>
-            </div>
-        </div>
 
         <!-- Dress Code -->
         <div class="section-title">Geyim Kodu (Dress Code)</div>
@@ -458,7 +222,7 @@
             </div>
         </div>
 
-        <!-- RSVP Formu -->
+        <!-- Vahid Form -->
         <div class="section-title">İştirak və Təbrik</div>
         <form id="rsvpForm">
             <div class="form-group">
@@ -491,55 +255,17 @@
 
             <button type="submit" class="btn-whatsapp">
                 <i class="fa-brands fa-whatsapp"></i>
-                Təsdiqlə
+                Təsdiqlə və WhatsApp ilə Göndər
             </button>
         </form>
     </div>
 
     <script>
-        // Zərf açılışı və Musiqi
-        function openEnvelope() {
-            const envelopeScreen = document.getElementById('envelope-screen');
-            const mainCard = document.getElementById('main-card');
-            const audio = document.getElementById('bg-music');
-
-            audio.play().catch(error => console.log("Musiqi xətası:", error));
-
-            envelopeScreen.style.opacity = '0';
-            setTimeout(() => {
-                envelopeScreen.style.display = 'none';
-                mainCard.style.opacity = '1';
-                mainCard.style.transform = 'translateY(0)';
-            }, 800);
-        }
-
-        // Taymer
-        const weddingDate = new Date("June 25, 2026 18:00:00").getTime();
-
-        function updateTimer() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            if (distance > 0) {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-            }
-        }
-        setInterval(updateTimer, 1000);
-        updateTimer();
-
-        // WhatsApp Göndərişi
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const phoneNumber = "994500000000"; // Öz WhatsApp nömrəniz
+            // WhatsApp Nömrənizi buraya daxil edin (məs: 994501234567)
+            const phoneNumber = "994500000000";
 
             const fullName = document.getElementById('fullName').value;
             const attendance = document.getElementById('attendance').value;
